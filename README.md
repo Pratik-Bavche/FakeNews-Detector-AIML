@@ -123,5 +123,6 @@ Open the application in your browser: http://localhost:5000/
 
 python app.py
 
-5. Open the application in your browser:
+Open the application in your browser:
 http://localhost:5000/
+
