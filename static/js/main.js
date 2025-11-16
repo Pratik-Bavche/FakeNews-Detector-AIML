@@ -6,13 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const textarea = document.getElementById('txt');
   const micBtn = document.getElementById('micBtn');
   const micIcon = document.getElementById('micIcon');
+  const checkBtn = document.getElementById('checkBtn');
   const enteredTextEl = document.querySelector('.entered-text');
 
   // update preview of entered text live
   if (textarea && enteredTextEl) {
-    textarea.addEventListener('input', () => {
+    const updateState = () => {
       enteredTextEl.textContent = textarea.value || 'No input yet';
-    });
+      if (checkBtn) checkBtn.disabled = !(textarea.value && textarea.value.trim().length > 0);
+    };
+    textarea.addEventListener('input', updateState);
+    // initialize state on page load
+    updateState();
   }
 
   // IMAGE OCR using Tesseract.js
@@ -63,13 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // VOICE / SPEECH input using Web Speech API
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   let recognition = null;
+  // make finalTranscript visible to click handler so we can reset between recordings
+  let finalTranscript = '';
   if (SpeechRecognition) {
     recognition = new SpeechRecognition();
     recognition.lang = 'en-US';
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
-
-    let finalTranscript = '';
 
     recognition.addEventListener('start', () => {
       micBtn.classList.add('listening');
@@ -115,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.stop();
       } else {
         // reset finalTranscript for fresh capture
+        finalTranscript = '';
         recognition.start();
       }
     } catch (err) {
