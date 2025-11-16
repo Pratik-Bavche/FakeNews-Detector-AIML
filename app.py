@@ -54,3 +54,11 @@ def pre():
             result = f"Prediction Error: {e}"
 
         return render_template("index.html", result=result)
+    
+# If the file is run directly:
+# __name__ becomes "__main__"
+# → Flask app starts.
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
