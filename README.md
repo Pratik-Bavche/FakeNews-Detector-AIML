@@ -121,8 +121,4 @@ Run the Flask server: python app.py
  
 Open the application in your browser: http://localhost:5000/
 
-python app.py
-
-Open the application in your browser:
-http://localhost:5000/
 
