@@ -1,28 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>FakeNews Detection AIML</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5/dist/tesseract.min.js"></script>
     </head>
     <body>
-        <form action="/" method="POST">
-            <textarea name="txt" rows="4" cols="50">
-            </textarea>
-            <input type="submit" name="submit">
-        </form>
-        <br/> 
-        <div>
-            <h3>Enterd Text is: </h3>
-            {{ request.form['txt'] }}
-        </div>
-        <div>
-            <h3> The Ml Model Found That is a:</h3>
-        <p>{% if result == 0 %}
-            <p style="color: red;">Fake News</p>
-           {% else  %}
-            <p><p style="color:seagreen;">True News</p></p>
-           {% endif  %}
-        </p> 
-        </div> 
-    </body>
+        <main class="container">
+            <header class="hero">
+                <div>
+                    <h1>FakeNews Detector</h1>
+                    <p class="subtitle">Paste, speak or upload a headline — we'll check if it's real.</p>
+                </div>
+                <div class="brand">AIML</div>
+            </header>
 
+            <section class="card input-card">
+                <form id="predict-form" action="/" method="POST">
+                    <label for="txt" class="sr">Enter news text</label>
+                    <textarea id="txt" name="txt" rows="4" placeholder="Paste or type the news headline here..."></textarea>
+
+                    <div class="controls">
+                        <div class="left-controls">
+                            <label class="upload-btn" for="imageInput">
+                                <i class="fa-solid fa-image"></i>
+                                <span>Upload Image</span>
+                                <input id="imageInput" type="file" accept="image/*" hidden>
+                            </label>
+                            <div id="imagePreview" class="image-preview" aria-hidden="true"></div>
+                        </div>
+
+                        <div class="right-controls">
+                            <button type="button" id="micBtn" class="mic-btn" title="Speak">
+                                <i id="micIcon" class="fa-solid fa-microphone"></i>
+                            </button>
+
+                            <button type="submit" class="check-btn">Check</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="ocrStatus" class="status"> </div>
+            </section>
+
+            <section class="card result-card">
+                <div class="result-block">
+                    <h3>Entered Text</h3>
+                    <div class="entered-text">{% if request.form %}{{ request.form['txt'] }}{% else %}<em>No input yet</em>{% endif %}</div>
+                </div>
+
+                <div class="result-block">
+                    <h3>Prediction</h3>
+                    <div class="prediction">
+                        {% if result is defined %}
+                            {% if result == 0 %}
+                                <div class="badge fake">Fake News</div>
+                            {% else %}
+                                <div class="badge real">True News</div>
+                            {% endif %}
+                        {% else %}
+                            <em>Submit text to get prediction</em>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">Powered by your existing ML model • UI enhanced</footer>
+        </main>
+
+        <script src="/static/js/main.js"></script>
+    </body>
 </html>

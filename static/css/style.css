@@ -1,0 +1,52 @@
+/* Modern responsive styles for FakeNews Detector */
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --muted:#94a3b8;
+  --accent:#6ee7b7;
+  --danger:#ff6b6b;
+  --glass: rgba(255,255,255,0.04);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,#071126 0%, #081728 60%);
+  color:#e6eef8; -webkit-font-smoothing:antialiased;
+}
+.container{max-width:980px;margin:28px auto;padding:20px}
+.hero{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.hero h1{margin:0;font-size:1.6rem;letter-spacing:0.4px}
+.subtitle{color:var(--muted);margin:6px 0 0;font-size:0.95rem}
+.brand{background:linear-gradient(90deg,var(--accent),#60a5fa);color:#012018;padding:8px 12px;border-radius:10px;font-weight:700}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+.input-card{display:block}
+textarea#txt{width:100%;padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:1rem;resize:vertical;min-height:88px}
+.controls{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:12px}
+.left-controls{display:flex;align-items:center;gap:12px}
+.upload-btn{display:inline-flex;align-items:center;gap:8px;background:var(--glass);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--muted);transition:all .18s ease}
+.upload-btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(2,6,23,0.5);color:var(--accent)}
+.upload-btn i{font-size:1.05rem}
+.image-preview{width:80px;height:56px;border-radius:8px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.image-preview img{width:100%;height:100%;object-fit:cover}
+.mic-btn{background:linear-gradient(90deg,#0f1724, #081028);border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:12px;color:var(--accent);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;min-width:48px}
+.mic-btn:hover{transform:translateY(-3px)}
+.mic-btn.listening{box-shadow:0 0 0 6px rgba(110,231,183,0.08),0 6px 20px rgba(0,0,0,0.6);animation:mic-pulse 1.2s infinite}
+@keyframes mic-pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+.check-btn{background:linear-gradient(90deg,var(--accent),#60a5fa);border:none;color:#042018;padding:10px 18px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(12,76,61,0.12);transition:transform .14s ease}
+.check-btn:hover{transform:translateY(-3px)}
+.status{margin-top:10px;color:var(--muted);font-size:0.95rem}
+.result-card{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.result-block h3{margin:0 0 8px 0;color:var(--muted);font-size:0.9rem}
+.entered-text{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-height:64px}
+.prediction{display:flex;align-items:center;justify-content:flex-start}
+.badge{padding:10px 14px;border-radius:999px;font-weight:700}
+.badge.fake{background:linear-gradient(90deg,#ff9b9b,#ff6b6b);color:#3a0606}
+.badge.real{background:linear-gradient(90deg,#7ef5c1,#46c3ff);color:#033638}
+.footer{text-align:center;color:var(--muted);font-size:0.85rem;padding:8px}
+.sr{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+
+@media (max-width:700px){
+  .result-card{grid-template-columns:1fr;}
+  .controls{flex-direction:column;align-items:stretch}
+  .right-controls{display:flex;gap:8px;justify-content:flex-end}
+}
