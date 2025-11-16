@@ -36,3 +36,21 @@ def wordpre(text):
 @app.route('/')
 def index():
     return render_template("index.html")
+
+
+#Model Prediction route
+@app.route('/', methods=['POST'])
+def pre():
+    if request.method == 'POST':
+        txt = request.form['txt']
+
+        # Clean text
+        clean_txt = wordpre(txt)
+        clean_txt = pd.Series([clean_txt])   # convert to pandas series
+
+        try:
+            result = Model.predict(clean_txt)[0]  # get prediction value
+        except Exception as e:
+            result = f"Prediction Error: {e}"
+
+        return render_template("index.html", result=result)
