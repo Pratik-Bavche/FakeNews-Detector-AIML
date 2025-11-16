@@ -31,3 +31,8 @@ def wordpre(text):
     text = re.sub("\n", " ", text)
     text = re.sub(r"\w*\d\w*", "", text)
     return text
+
+#Render to our webpage
+@app.route('/')
+def index():
+    return render_template("index.html")
