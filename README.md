@@ -75,7 +75,6 @@ Fake-News-Detection/
 
 Model training was done using a Jupyter Notebook (modeltrainpratik.ipynb file).
 Multiple datasets (real + fake news) were combined and preprocessed before training.
-
 Although the model may not provide 100% accuracy, it performs well on general text inputs and responds correctly in most cases.
 
 # ▶️ How to Run the Project
@@ -88,10 +87,3 @@ python app.py
 3. Open the application in your browser:
 http://localhost:5000/
 
-
-# You can now:
-
-Type a news headline
-Provide voice input
-Upload an image containing news text
-Get a prediction (REAL or FAKE)
